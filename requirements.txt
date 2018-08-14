@@ -1,0 +1,11 @@
+requests==2.19.1
+gunicorn==19.9.0
+git+git://github.com/KXJiao/textract
+sumy==0.7.0
+numpy==1.14.5
+validators==0.12.2
+flask==1.0.2
+gensim==3.5.0
+Pillow==5.2.0
+pytesseract==0.2.4
+

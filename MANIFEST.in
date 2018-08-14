@@ -1,0 +1,3 @@
+graft researchtime/static
+graft researchtime/templates
+global-exclude *.pyc

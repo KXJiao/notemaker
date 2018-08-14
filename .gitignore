@@ -1,0 +1,9 @@
+venv/
+.git/
+*.pyc
+*.pyo
+instance/
+dist/
+build/
+__pycache__/
+researchtime.egg-info/

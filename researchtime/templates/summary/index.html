@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+
+{% block head %}
+    {{ super() }}
+    <link href="{{ url_for('static', filename='css/vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/vendor/font-awesome/css/font-awesome.min.css') }}" rel="stylesheet" type="text/css">
+
+    <link href='https://fonts.googleapis.com/css?family=Open+Sans:300italic,400italic,600italic,700italic,800italic,400,300,600,700,800' rel='stylesheet' type='text/css'>
+    <link href='https://fonts.googleapis.com/css?family=Merriweather:400,300,300italic,400italic,700,700italic,900,900italic' rel='stylesheet' type='text/css'>
+    
+    <link href="{{ url_for('static', filename='css/vendor/magnific-popup/magnific-popup.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='css/creative.css') }}" rel="stylesheet">
+{% endblock %}
+<!-- {% block header %}
+    <h1>{% block title %}Note Maker{% endblock %}</h1>
+{% endblock %} -->
+<!-- <input type = "text" pattern = "\d*" name = "sentNum" id = "sentNum1" placeholder="Number of sentences"> -->
+
+{% block content %}
+<section section id="services">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <h2 class="section-heading">Input</h2>
+                <hr class="my-4">
+            </div>
+        </div>
+    </div>
+    <div class = "container">
+        <div class = "center">
+            <button class="button" id="gotoupload">Upload File</button>
+            <button class="button" id="gototext">Paste Text</button>
+            <button class="button" id="gotourl">From URL</button>
+        </div>
+        <div class = "center">
+            <form action = "/fileupload" method="post" enctype="multipart/form-data" id = "fileupload">
+                File (.txt, .pdf, .doc, .docx, .jpg, .png): 
+                <br>
+                <input name="file" type="file" id = "file" />
+                <input class="btn btn-primary btn-xl" type="submit" name="upload" id = "upload" value="Make Notes" />
+            </form>
+            <form method="post" id="textbox">
+                <textarea name = "text" id = "textinput" rows = "8" cols = "70" style="resize: vertical;"></textarea><br>
+                <input class="btn btn-primary btn-xl" name = "compare" type = "submit" value = "Make Notes">
+            </form>
+            <form method="post" id="externalurl">
+                <input id = "url" type="text" name="url" placeholder="External URL">
+                <input class="btn btn-primary btn-xl" type="submit" name="external" value = "Make Notes">
+            </form>
+            <img id = "loading" src="{{ url_for('static', filename='img/loading.gif') }}" alt="loading..."/>
+            <div id = "errors"></div>
+        </div>
+        <br><br>
+        <div class="row">
+            <p>Subject of Text: &emsp;</p>
+            <form>
+                <select name="subject">
+                    <option value="biology">Biology</option>
+                    <option value="chemistry">Chemistry</option>
+                    <option value="physics">Physics</option>
+                    <option value="mathematics">Mathematics</option>
+                    <option value="history">History</option>
+                    <option value="psychology">Psychology</option>
+                    <option value="other">Other</option>
+                </select>
+            </form>
+            <div class="row right">
+                <p>Number of Points: &emsp;</p>
+                <form>
+                    <input type="text" pattern = "\d*" id = "sentNum" style="width: 50px" name="number" placeholder="5">
+                </form>
+            </div>
+        </div>
+    </div>
+</section>
+<section class="bg-primary" id="portfolio">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-lg-8 mx-auto text-center">
+                <h2 class="section-heading text-white">Notes</h2>
+            </div>
+        </div>
+        <div class="row">
+            <div id = "hidethis" class = "col-lg-8 mx-auto text-center">
+                <p class = "mb-5 text-white">Please input a file, text, or url above first!</p>
+            </div>
+            <div id = "htl" class = "col-lg-6">
+                <textarea style="height:100% !important;" id="highlighttext"></textarea>
+            </div>
+            <div id= "tsr" class = "col-lg-6">
+                <textarea id="textsummary" style="position: absolute; background: transparent; width:100% !important; height:100% !important;"></textarea>
+            </div>
+        </div>
+    </div>
+</section>
+
+
+<!--  
+    <section class = "text-center">
+        <div class ="container">
+            <div class="align-items-center">
+                <div class="text-center" style="overflow: auto; height: 500px;">
+                    <div class="align-items-center">
+                        <button class = "btn btn-primary btn-xl rounded-pill mt-5" id="gotoupload">Upload</button>
+                        <button class = "btn btn-primary btn-xl rounded-pill mt-5" id="gototext">Paste Text</button>
+                        <button class = "btn btn-primary btn-xl rounded-pill mt-5" id="gotourl">URL</button>
+                    </div>
+                    
+                    <div class="align-items-center">
+                        <form action = "/fileupload" method="post" enctype="multipart/form-data" id = "fileupload">
+                            <input type = "text" pattern = "\d*" name = "sentNum" id = "sentNum1" placeholder="Number of sentences">
+                            File: <input name="file" type="file" id = "file" />
+                                <input type="submit" name="upload" id = "upload" value="Upload" />
+                        </form>
+                        <form method="post" id="textbox">
+                                <input type = "text" pattern = "\d*" name = "sentNum" id = "sentNum2" placeholder="Number of sentences"><br>
+                                <textarea name = "text" id = "textinput" rows = "8" cols = "70" style="resize: vertical;"></textarea><br>
+                                <input name = "compare" type = "submit" value = "Summarize">
+                        </form>
+                        <form method="post" id="externalurl">
+                            <input type = "text" pattern = "\d*" name = "sentNum" id = "sentNum" placeholder="Number of sentences">
+                            <div>
+                                <input id = "url" type="text" name="url" placeholder="External URL">
+                                <input type="submit" name="external" value = "Submit">
+                            </div>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    <section>
+        <div class = "container">
+            <div class = "row align-items-center">
+                <div class = "col-lg-6">
+                    <textarea style="height:100% !important;" id="highlighttext"></textarea>
+                </div>
+                <div class = "col-lg-6">
+                    <textarea id="textsummary" style="position: absolute; background: transparent; width:100% !important; height:100% !important;"></textarea>
+                </div>
+            </div>
+        </div>
+    </section>
+-->
+
+    <script src = "{{ url_for('static', filename='jquery-3.3.1.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='jquery.form.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='app.js') }}"></script>
+    <script src = "{{ url_for('static', filename='jquery.tinymce.min.js') }}"></script> 
+    <script src = "{{ url_for('static', filename='tinymce.min.js') }}"></script>
+
+    <script src = "{{ url_for('static', filename='css/vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='css/vendor/jquery-easing/jquery.easing.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='css/vendor/scrollreveal/scrollreveal.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='css/vendor/magnific-popup/jquery.magnific-popup.min.js') }}"></script>
+    <script src = "{{ url_for('static', filename='css/js/creative.min.js') }}"></script>
+
+
+    
+{% endblock %}

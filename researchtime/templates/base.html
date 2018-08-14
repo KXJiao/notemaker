@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html>
+{% block head %}
+    <title>{% block title %}{% endblock %} - Note Maker</title>
+    <!-- <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}"> -->
+{% endblock %}
+<body id="page-top">
+    <nav class="navbar navbar-expand-lg navbar-light fixed-top" id="mainNav">
+        <div class="container">
+            <a class="navbar-brand js-scroll-trigger" href="#page-top">NoteMaker</a>
+            <button class="navbar-toggler navbar-toggler-right" type="button" data-toggle="collapse" data-target="#navbarResponsive" aria-controls="navbarResponsive" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarResponsive">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#about">About</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#services">Input</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#portfolio">Notes</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link js-scroll-trigger" href="#contact">Contact</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+    <header class="masthead text-center text-white d-flex">
+        <div class="container my-auto">
+            <div class="row">
+                <div class="col-lg-10 mx-auto">
+                    <h1>
+                        <strong>NoteMaker</strong>
+                    </h1>
+                    <hr>
+                </div>
+                <div class="col-lg-8 mx-auto">
+                    <p class="text-faded mb-5">Input text and let the AI do the rest!</p>
+                    <a class="btn btn-primary btn-xl js-scroll-trigger" href="#about">Find Out More</a>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <section class="bg-primary" id="about">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading text-white">We've got what you need!</h2>
+                    <hr class="light my-4">
+                    <p class="text-faded mb-4">Input text in a variety of ways and let our artificial intelligence extract the key points.  You can edit these points, highlight where they came from, and add more points in our easy-to-use interface.  Our motto is made by students for students!</p>
+                    <a class="btn btn-light btn-xl js-scroll-trigger" href="#services">Get Started!</a>
+                </div>
+            </div>
+        </div>
+    </section>
+    
+    {% block content %}{% endblock %}
+
+    <section class="bg-dark text-white">
+        <div class="container text-center">
+            <h2 class="mb-4">Free Download at Start Bootstrap!</h2>
+            <a class="btn btn-light btn-xl sr-button" href="http://startbootstrap.com/template-overviews/creative/">Download Now!</a>
+        </div>
+    </section>
+
+    <section id="contact">
+        <div class="container">
+            <div class="row">
+                <div class="col-lg-8 mx-auto text-center">
+                    <h2 class="section-heading">Let's Get In Touch!</h2>
+                    <hr class="my-4">
+                    <p class="mb-5">Ready to start your next project with us? That's great! Give us a call or send us an email and we will get back to you as soon as possible!</p>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-4 ml-auto text-center">
+                    <i class="fa fa-phone fa-3x mb-3 sr-contact"></i>
+                    <p>123-456-6789</p>
+                </div>
+                <div class="col-lg-4 mr-auto text-center">
+                    <i class="fa fa-envelope-o fa-3x mb-3 sr-contact"></i>
+                    <p>
+                        <a href="mailto:your-email@your-domain.com">feedback@startbootstrap.com</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+</body>
+</html>
