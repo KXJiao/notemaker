@@ -1,2 +1,2 @@
-# Critical Info
-[Link on Heroku](https://critical-info.herokuapp.com/)
+# Note Maker
+[Link on Heroku](https://note-maker.herokuapp.com/)
