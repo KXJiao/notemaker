@@ -1,127 +1,138 @@
-acceleration
-alternating current
-ampere
-amplifier
-angstrom
-anion
-antimeter
-atom
-baryon
-becquerel
+Acceleration
+Alternating current
+Ampere
+Amplifier
+Angstrom
+Anion
+Antimeter
+Atom
+Baryon
+Becquerel
 Boyle's Law
 Brownian motion
-cacion
-calorie
-capacitance
-cathode ray
-center of gravity
-centrifugal force
-centripetal force
-charge
+Cacion
+Calorie
+Capacitance
+Cathode Ray
+Center of gravity
+Centrifugal force
+Centripetal force
+Charge
 Charles' Law
-conductor
-convection
-cosmic ray
-coulomb
-current
-cyclotron
-decibel
-density
-diffraction
-diffusion
-diode
-direct current
+Conductor
+Convection
+Cosmic ray
+Coulomb
+Current
+Cyclotron
+Decibel
+Density
+Diffraction
+Diffusion
+Diode
+Direct Current
 Doppler Effect
-earth
-electricity
-electromotice force
-electron
-energy
-farad
-field
-fission
-fluorescence
-force
-frequency
-friction
-fuse
-fusion
-gamma ray
-generator
-gravity
-half-life
-hertz
-hyperon
-impetus
-inductance
-inertia
-infrared
-joule
-kelvin
-kinetic energy
-laser
-lens
-lepton
-luminescence
-mass
-matter
-meson
-microwave
-moment
-momentum
-muon
-neutrino
-neutron
-newton
-nucleon
-nucleus
-ohm
+Earth
+Electricity
+Electromotice force
+Electron
+Energy
+Farad
+Field
+Fission
+Fluorescence
+Force
+Frequency
+Friction
+Fuse
+Fusion
+Gamma Ray
+Generator
+Gravity
+Half-Life
+Hertz
+Hyperon
+Impetus
+Inductance
+Inertia
+Infrared
+Joule
+Kelvin
+Kinetic Energy
+Laser
+Lens
+Lepton
+Luminescence
+Magnet
+Mass
+Matter
+Meson
+Microwave
+Moment
+Momentum
+Muon
+Neutrino
+Neutron
+Newton
+Nucleon
+Nucleus
+Ohm
 Ohm's Law
-particle
-pascal
+Particle
+Pascal
 Planck's constant
-potential difference
-potential energy
-proton
-quantum
-radiation
-radioactivity
-radio wave
-red shift
-reflection
-refraction
-relativity
-resistance
-semiconductor
-simple harmonic motion
-spectrum
-static electricity
-subatomic particle
-superconductivity
-superfluidity
-surface tension
-tau particle
-tension
-terminal velocity
-thermostat
-transformer
-transistor
-ultraviolet
-vacuum
-velocity
-viscosity
-volt
-watt
-wave
-wavelength
-x-ray
+Potential difference
+Potential energy
+Proton
+Quantum
+Radiation
+Radioactivity
+Radio Wave
+Red Shift
+Reflection
+Refraction
+Relativity
+Resistance
+Semiconductor
+Simple Harmonic Motion
+Spectrum
+Static Electricity
+Subatomic Particle
+Superconductivity
+Superfluidity
+Surface Tension
+Tau Particle
+Tension
+Terminal Velocity
+Thermodynamics
+Thermostat
+Transformer
+Transistor
+Ultraviolet
+Vacuum
+Velocity
+Viscosity
+Volt
+Watt
+Wave
+Wavelength
+X-Ray
 Hall Effect
-motor
-generator
-voltage
-resistor
-capacitor
-electrode
-electrolyte
-inductor
-electrostatic
+Motor
+Generator
+Voltage
+Resistor
+Capacitor
+Electrode
+Electrolyte
+Inductor
+Electrostatic
+Neutron Star
+Pulsar
+Chandrashekhar Limit
+Hubble Telescope
+Payload
+Supernova
+Hypernova
+Van Allen Belt
+Oort Cloud

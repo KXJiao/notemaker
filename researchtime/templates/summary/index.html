@@ -41,19 +41,19 @@
             </form>
             <form method="post" id="textbox">
                 <textarea name = "text" id = "textinput" rows = "8" cols = "70" style="resize: vertical;"></textarea><br>
-                <input class="btn btn-primary btn-xl" name = "compare" type = "submit" value = "Make Notes">
+                <input class="btn btn-primary btn-xl" name = "compare" type = "submit" id = "compare" value = "Make Notes">
             </form>
             <form method="post" id="externalurl">
                 <input id = "url" type="text" name="url" placeholder="External URL">
-                <input class="btn btn-primary btn-xl" type="submit" name="external" value = "Make Notes">
+                <input class="btn btn-primary btn-xl" type="submit" name="external" id = "external" value = "Make Notes">
             </form>
             <img id = "loading" src="{{ url_for('static', filename='img/loading.gif') }}" alt="loading..."/>
             <div id = "errors"></div>
         </div>
         <br><br>
         <div class="row">
-            <p>Subject of Text: &emsp;</p>
-            <form>
+            <p>Subject of Text (beta): &emsp;</p><p id = "tsubject"></p>
+            <!-- <form>
                 <select name="subject">
                     <option value="biology">Biology</option>
                     <option value="chemistry">Chemistry</option>
@@ -63,7 +63,7 @@
                     <option value="psychology">Psychology</option>
                     <option value="other">Other</option>
                 </select>
-            </form>
+            </form> -->
             <div class="row right">
                 <p>Number of Points: &emsp;</p>
                 <form>

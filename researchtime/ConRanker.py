@@ -25,6 +25,33 @@ def findCount(sub,text):
             count += 1
     return count
 
+def getSubject(text):
+    subArr = []
+    basedir = os.path.abspath(os.path.dirname(__file__))
+    subArr.append((findCount(os.path.join(basedir, "static","bioTerms.txt"),text), "bioTerms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","chemTerms.txt"),text), "chemTerms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","History_terms.txt"),text), "History_terms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","physics_terms.txt"),text), "physics_terms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","math_terms.txt"),text), "math_terms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","biographyTerms.txt"),text), "biographyTerms.txt"))
+
+    subArr = sorted(subArr)[::-1]
+
+    if subArr[0][1] == "bioTerms.txt":
+        return "Biology"
+    elif subArr[0][1] == "chemTerms.txt":
+        return "Chemistry"
+    elif subArr[0][1] == "History_terms.txt":
+        return "History"
+    elif subArr[0][1] == "physics_terms.txt":
+        return "Physics"
+    elif subArr[0][1] == "math_terms.txt":
+        return "Math"
+    elif subArr[0][1] == "biographyTerms.txt":
+        return "Biography"
+    else:
+        return "Other"
+
 def summary(text, num):
     start = time.time()
     
@@ -39,6 +66,8 @@ def summary(text, num):
     subArr.append((findCount(os.path.join(basedir, "static","chemTerms.txt"),text), "chemTerms.txt"))
     subArr.append((findCount(os.path.join(basedir, "static","History_terms.txt"),text), "History_terms.txt"))
     subArr.append((findCount(os.path.join(basedir, "static","physics_terms.txt"),text), "physics_terms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","math_terms.txt"),text), "math_terms.txt"))
+    subArr.append((findCount(os.path.join(basedir, "static","biographyTerms.txt"),text), "biographyTerms.txt"))
     subArr = sorted(subArr)[::-1]
 
     topDict = subArr[0][1]

@@ -37,7 +37,7 @@ $(document).ready(function() {
     $('#tsr').hide();
     $('#loading').hide();
     $('#errors').text('')
-
+    $('#tsubject').text('')
 
 
     $('#gotoupload').click(function(e){
@@ -69,17 +69,44 @@ $(document).ready(function() {
         });
     });
 
+    // $('#textsummary').on('click', '.summarypoint', function(){
+    //     spText = $(this).text();
+    //     console.log(spText);
+
+    // });
+    var highlightPoints = [];
+    tinymce.get('textsummary').on('click', function(e){
+        if ($(e.target).attr('class') == 'summarypoint'){
+            spTextIndex = $(e.target).attr('highlightid');
+            spText = highlightPoints[parseInt(spTextIndex)];
+            hlText = tinyMCE.get('highlighttext').getContent({ format: 'text' });
+            hlText = hlText.replace(spText, '<mark>' + spText + '</mark>');
+            tinyMCE.get('highlighttext').setContent(hlText);
+            // hlIndex = hlText.indexOf(spText)
+            // hlEndex = -1
+            // if (!(hlIndex == -1)){
+            //     hlEndex = hlIndex + spText.length;
+            // }
+            // console.log("index: " + hlIndex + " endex: " + hlEndex)
+        }
+    });
+
+
     var files;
     $('#file').on('change', function(event) { 
         $('#errors').text('')
         files = event.target.files;
     }); 
-
 /////////////////////File uploader
+
+    
     $('#fileupload').on('submit', function(event){
         //event.stopPropagation();
         event.preventDefault();
         $('#errors').text('')
+        $('#upload').prop('disabled',true);
+        $('#compare').prop('disabled',true);
+        $('#external').prop('disabled',true);
 
         if($('#file')[0].files[0].size < 5242880){
             $('#loading').show();
@@ -90,11 +117,6 @@ $(document).ready(function() {
             var data = new FormData();
             data.append('sentNum', sentNum);
             data.append('file', $('#file')[0].files[0]);
-            // $.each(files, function(i, file){
-            //      //console.log('file no: ' + i + ' file: ' + file)
-            //      data.append('file-' + (i+1), file);
-            // });
-            //data.append($('#file'[0]))
 
             $.ajax({
                 url: '/fileupload',
@@ -107,10 +129,16 @@ $(document).ready(function() {
                     $('#loading').hide();
                     $('#htl').show();
                     $('#tsr').show();
+                    $('#tsubject').text(data.subject)
+                    $('#hidethis').hide();
+                    $('#upload').prop('disabled',false);
+                    $('#compare').prop('disabled',false);
+                    $('#external').prop('disabled',false);
                     tinymce.get('highlighttext').setContent(data.og);
                     var addText = '<ul>'
                     for(i = 0; i<data.summary.length; i++){
-                        addText = addText + '\n' + '<li onclick="highlight(this)">' + data.summary[i] + '</li>'
+                        addText = addText + '\n' + '<li class="summarypoint" highlightid = "' + highlightPoints.length + '"">' + data.summary[i] + '</li>'
+                        highlightPoints.push(data.summary[i]);
                     }
                     addText = addText + '</ul>'
                     $('#textsummary_ifr').contents().find('#tinymce').append(addText);
@@ -120,6 +148,13 @@ $(document).ready(function() {
                     }, 500);
 
                     tinymce.execCommand('mceFocus',false,'textsummary');
+                },
+                error: function(data){
+                    $('#upload').prop('disabled',false);
+                    $('#compare').prop('disabled',false);
+                    $('#external').prop('disabled',false);
+                    $('#loading').hide();
+                    $('#errors').text('There was an error. Maybe the file has too many words?')
                 }
             })
         }
@@ -134,6 +169,9 @@ $(document).ready(function() {
     var request;
     $('#textbox').on('submit', function(event){
         event.preventDefault();
+        $('#upload').prop('disabled',true);
+        $('#compare').prop('disabled',true);
+        $('#external').prop('disabled',true);
         $('#errors').text('')
         $('#loading').show();
         var sentNum = $('#sentNum').val()
@@ -154,15 +192,19 @@ $(document).ready(function() {
                 $('#htl').show();
                 $('#tsr').show();
                 //data.og = original text, data.summary = array of summary points
+                $('#tsubject').text(data.subject)
+                $('#hidethis').hide();
+                $('#upload').prop('disabled',false);
+                $('#compare').prop('disabled',false);
+                $('#external').prop('disabled',false);
                 tinymce.get('highlighttext').setContent(data.og);
 
                 //handle text highlighting here: when clicking the summary point, will highlight in original text
 
                 var addText = '<ul>'
                 for(i = 0; i<data.summary.length; i++){
-                    addText = addText + '\n' + '<li onclick="highlight(this)">' + data.summary[i] + '</li>'
-                    //$('#textsummary_ifr').contents().find('#tinymce').append('<li>' + data.summary[i] + '</li>');
-                    //$('#textsummary').append('<li>' + data.summary[i] + '</li>')
+                    addText = addText + '\n' + '<li class="summarypoint" highlightid = "' + highlightPoints.length + '"">' + data.summary[i] + '</li>'
+                    highlightPoints.push(data.summary[i]);
                 }
                 addText = addText + '</ul>'
                 $('#textsummary_ifr').contents().find('#tinymce').append(addText);
@@ -176,7 +218,11 @@ $(document).ready(function() {
                 
             },
             error: function(error){
-                console.log('error for textbox')
+                $('#upload').prop('disabled',false);
+                $('#compare').prop('disabled',false);
+                $('#external').prop('disabled',false);
+                $('#loading').hide();
+                $('#errors').text('There was an error. Maybe there are too many words?')
             }
         });
     });
@@ -185,13 +231,15 @@ $(document).ready(function() {
     /////////////////////////URL
     $('#externalurl').on('submit', function(e){
         e.preventDefault();
+        $('#upload').prop('disabled',true);
+        $('#compare').prop('disabled',true);
+        $('#external').prop('disabled',true);
         $('#errors').text('')
         $('#loading').show();
         var sentNum = $('#sentNum').val();
         var url = $('#url').val();
         //verify the url 
 
-        data.append('file', objectURL)
         $.ajax({
             url: '/summarize',
             type: 'post',
@@ -203,70 +251,43 @@ $(document).ready(function() {
                 data: url
             }),
             success: function(data){
+                $('#loading').hide();
+                $('#htl').show();
+                $('#tsr').show();
+                //data.og = original text, data.summary = array of summary points
+                $('#tsubject').text(data.subject)
+                $('#hidethis').hide();
+                $('#upload').prop('disabled',false);
+                $('#compare').prop('disabled',false);
+                $('#external').prop('disabled',false);
+                tinymce.get('highlighttext').setContent(data.og);
+
+                //handle text highlighting here: when clicking the summary point, will highlight in original text
+
+                var addText = '<ul>'
+                for(i = 0; i<data.summary.length; i++){
+                    addText = addText + '\n' + '<li class="summarypoint" highlightid = "' + highlightPoints.length + '"">' + data.summary[i] + '</li>'
+                    highlightPoints.push(data.summary[i]);
+                }
+                addText = addText + '</ul>'
+                $('#textsummary_ifr').contents().find('#tinymce').append(addText);
                 
+                $('html, body').animate({
+                    scrollTop: $('#portfolio').offset().top
+                }, 500);
+
+                tinymce.execCommand('mceFocus',false,'textsummary');
             },
             error: function(data){
-                console.log('error for url')
+                $('#upload').prop('disabled',false);
+                $('#compare').prop('disabled',false);
+                $('#external').prop('disabled',false);
+                $('#loading').hide();
+                $('#errors').text('There was an error. Maybe the file has too many words?')
             }
         });
 
 
     });
-        
-    function afterSuccess(){
-        console.log('successful file upload');
-    }
-
-            
-    function beforeSubmit(){
-        if (window.File && window.FileReader && window.FileList && window.Blob){
-            if( !$('#file').val()) {
-                $('#output').html('No file selected.');
-                return false;
-            }
-        
-            var fsize = $('#file')[0].files[0].size; 
-            var ftype = $('#file')[0].files[0].type; 
-
-            //allow file types 
-            switch(ftype){
-                case 'image/png': 
-                case 'image/jpeg': 
-                case 'image/pjpeg':
-                case 'application/pdf':
-                case 'application/msword':
-                case 'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
-                case 'text/plain':
-                case 'text/html':
-                case 'application/epub+zip':
-                    break;
-                default:
-                    $('#output').html('<b>'+ftype+'</b> Unsupported file type!');
-                    return false
-            }
-        
-            //Allowed file size is less than 50 MB (1MB: 1048576)
-            if(fsize>52428800){
-                $('#output').html('<b>'+bytesToSize(fsize) +'</b> Too big file! <br />File is too big, it should be less than 50 MB.');
-                return false;
-            }
-                
-            // $('#output').html('');  
-        }
-        else{
-            //Output error to older unsupported browsers that doesn't support HTML5 File API
-            $('#output').html('Please upgrade your browser, because your current browser lacks some new features we need!');
-            return false;
-        }
-    }
-
-    //function to format bites bit.ly/19yoIPO
-    function bytesToSize(bytes) {
-        var sizes = ['Bytes', 'KB', 'MB', 'GB', 'TB'];
-        if (bytes == 0) return '0 Bytes';
-        var i = parseInt(Math.floor(Math.log(bytes) / Math.log(1024)));
-        return Math.round(bytes / Math.pow(1024, i), 2) + ' ' + sizes[i];
-    }
-
     
 }); 

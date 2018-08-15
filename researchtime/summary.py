@@ -13,25 +13,39 @@ import validators
 import sys
 from PIL import Image
 import pytesseract
-import magic
+import mimetypes
 # ConRanker imports
 from . import ConRanker
 
-
+'''
+                'image/png': 
+                'image/jpeg': 
+                'image/pjpeg':
+                'application/pdf':
+                'application/msword':
+                'application/vnd.openxmlformats-officedocument.wordprocessingml.document':
+                'text/plain':
+                'text/html':
+                'application/epub+zip':
+'''
 ALLOWED_EXTENSIONS = set(['txt', 'pdf', 'doc', 'docx', 'html', 'htm', 'epub', 'jpg', 'jpeg', 'png'])
+ALLOWED_MIME = set(['text/plain', 'application/pdf', 'application/msword', 'application/vnd.openxmlformats-officedocument.wordprocessingml.document', 'text/html', 'image/jpeg', 'image/pjpeg', 'image/png'])
+MIME_TO_EXT = {
+    'text/plain':'txt', 
+    'application/pdf':'pdf', 
+    'application/msword':'doc', 
+    'application/vnd.openxmlformats-officedocument.wordprocessingml.document':'docx', 
+    'text/html':'html', 
+    'image/jpeg':'jpg', 
+    'image/pjpeg':'jpg', 
+    'image/png':'png'   
+}
 
 def allowed_file(filename):
     return '.' in filename and filename.rsplit('.', 1)[1].lower() in ALLOWED_EXTENSIONS
 
-# def summarize(text, num):
-#     parser = PlaintextParser.from_string(text, Tokenizer('english'))
-#     summarizer = LexRankSummarizer()
-#     summary = summarizer(parser.document, num)
-#     summarized = []
-#     for sentence in summary:
-#         summarized.append(str(sentence))
-#     return summarized
-
+def allowed_mime(mimetype):
+    return '/' in mimetype and mimetype.lower() in ALLOWED_MIME
 
 
 bp = Blueprint('summary', __name__)
@@ -39,71 +53,6 @@ bp = Blueprint('summary', __name__)
 def index():
     processed = ''
     filecontent = ''
-    if request.method == 'POST':
-        sentenceNum = 5
-        try:
-            snum = int(request.form['sentNum'])
-            if snum >0 and snum < 100:
-                sentenceNum = snum
-        except:
-            sentenceNum = 5
-
-        #Summarize textbox
-        if 'compare' in request.form:
-            raw_text = request.form['text']
-            if raw_text != '':
-                filecontent = raw_text
-                processed = ConRanker.summary(raw_text, sentenceNum)#summarize(raw_text, sentenceNum)
-                return render_template('summary/processed.html', processed=processed, filecontent=filecontent)
-            return ''
-
-        #Summarize uploaded file
-        elif 'upload' in request.form:
-            if 'file' not in request.files:
-                return 'No file'
-            file = request.files['file']
-            if file.filename == '':
-                return 'No selected file'
-            if file and allowed_file(file.filename):
-                ext = file.filename.rsplit('.', 1)[1].lower()
-                file.filename = str(uuid.uuid4()) + '.' + ext
-                filename = secure_filename(file.filename)
-                print('uploading: ' + filename)
-                basedir = os.path.abspath(os.path.dirname(__file__))
-                file.save(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
-                tobeprocessed = textract.process(url_for('summary.uploaded_file', filename=filename))
-                processed = ConRanker.summary(tobeprocessed, sentenceNum)#summarize(tobeprocessed, sentenceNum)
-
-                os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
-
-                return render_template('summary/processed.html', processed=processed, filecontent=tobeprocessed)
-            return 'File not allowed'
-
-        #Summarize file from URL
-        elif 'external' in request.form:
-            #add code to check if proper url
-            link = request.form['url']
-            if link == '' or not validators.url(link):
-                return 'Bad URL'
-            r = requests.get(link, allow_redirects=True)
-            filename = link.rsplit('/', 1)[1]
-            print('downloading: ' + filename)
-            if r and allowed_file(filename):
-                ext = filename.rsplit('.', 1)[1].lower()
-                filename = str(uuid.uuid4()) + '.' + ext 
-                basedir = os.path.abspath(os.path.dirname(__file__))
-                with app.open_instance_resource(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename), 'wb') as f:
-                    f.write(r.content)
-
-                unprocessed = textract.process(url_for('summary.uploaded_file', filename=filename))
-                processed = ConRanker.summary(unprocessed, sentenceNum)#summarize(unprocessed, sentenceNum)
-
-                os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
-
-                return render_template('summary/processed.html', processed=processed, filecontent=unprocessed)
-            return 'File not allowed'
-
-
 
     return render_template('summary/index.html', processed=processed, filecontent=filecontent)
 
@@ -126,53 +75,68 @@ def smmze():
         if snum >0 and snum < 50:
             senNum = snum
     except:
-        senNumNum = 5
+        senNum = 5
 
     if sm_type == 'text':
         text = data.get('data')
         if text != '':
             # send the highlighted text as well
+            subject = ConRanker.getSubject(text)
             processed = ConRanker.summary(text, senNum)#summarize(text, senNum)
             summarized = []
             for sentence in processed:
                 summarized.append(str(sentence))
 
 
-            return jsonify(og=text,summary=summarized)#highlight='blahblah'
-        return jsonify(og='',summary='')#highlight=''
+            return jsonify(og=text,summary=summarized,subject=subject)#highlight='blahblah'
+        return jsonify(og='',summary='',subject='')#highlight=''
 
     elif sm_type == 'url':
 
         #############################################################################3
-            link = data.get('data')
-            if link == '' or not validators.url(link):
-                return 'Bad URL'
-            r = requests.get(link, allow_redirects=True)
+        link = data.get('data')
+        errors = 'nothing here for now but will be changed in due time. when me president, they see'
+        if link == '' or not validators.url(link):
+            return 'Bad URL'
+        r = requests.get(link, allow_redirects=True)
+        print(r.status_code)
+        if r.status_code == 200:
+            conttype = r.headers['content-type'].split(';', 1)[0]
+            print("ur content type is: ",conttype)
             filename = link.rsplit('/', 1)[1]
             print('downloading: ' + filename)
-            if r and allowed_file(filename):
-                ext = filename.rsplit('.', 1)[1].lower()
+
+            if r and allowed_mime(conttype):
+                ext = MIME_TO_EXT.get(conttype)#filename.rsplit('.', 1)[1].lower()
                 filename = str(uuid.uuid4()) + '.' + ext 
                 basedir = os.path.abspath(os.path.dirname(__file__))
                 with app.open_instance_resource(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename), 'wb') as f:
                     f.write(r.content)
 
-                unprocessed = textract.process(url_for('summary.uploaded_file', filename=filename))
-                processed = ConRanker.summary(unprocessed, sentenceNum)#summarize(unprocessed, sentenceNum)
+                unprocessed = ''
+                if not (ext == 'jpg' or ext == 'jpeg' or ext == 'png' or ext == 'gif'):
+                    unprocessed = textract.process(url_for('summary.uploaded_file', filename=filename))
+                else:
+                    img = Image.open(url_for('summary.uploaded_file', filename=filename))
+                    unprocessed = pytesseract.image_to_string(img, lang='eng')
+
+                try:
+                    unprocessed = unprocessed.decode('utf-8')
+                except AttributeError:
+                    pass
+                subject = ConRanker.getSubject(unprocessed)
+                processed = ConRanker.summary(unprocessed, senNum)#summarize(unprocessed, sentenceNum)
 
                 os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
 
-                return render_template('summary/processed.html', processed=processed, filecontent=unprocessed)
-            return 'File not allowed'
+                summarized = []
+
+                for sentence in processed:
+                    summarized.append(str(sentence))
+
+                return jsonify(og=unprocessed,summary=summarized,subject=subject)
+            return jsonify(error=errors)
         #############################################################################3
-        unprocessed = textract.process(url_for('summary.uploaded_file', filename=uploadfilename))
-        processed = ConRanker.summary(unprocessed, senNum)
-        summarized = []
-        for sentence in processed:
-            summarized.append(str(sentence))
-
-        return jsonify(og=unprocessed,summary=summarized)
-
 
     return 'test'
 
@@ -213,12 +177,16 @@ def filesmmze():
             except AttributeError:
                 pass
 
-
+            subject = ConRanker.getSubject(tobeprocessed)
             processed = ConRanker.summary(tobeprocessed, sentenceNum)#summarize(tobeprocessed, sentenceNum)
 
             os.remove(os.path.join(basedir, app.config['UPLOAD_FOLDER'], filename))
 
-            return jsonify(og=tobeprocessed,summary=processed)
+            summarized = []
+            for sentence in processed:
+                summarized.append(str(sentence))
+
+            return jsonify(og=tobeprocessed,summary=processed,subject=subject)
         print('File not allowed')
         return 'File not allowed'
 

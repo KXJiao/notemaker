@@ -1,84 +1,89 @@
-agricultural revolution
-alliances
-ancient civilizations
-archaeology
-architecture
-bourgeoisie
-business
-Catholocism
-civil war
-class
-colonialism
-crusades
-culture
-demography
-diaspora
-discourse
-early modern
-education
-epochs
-geography
-globalization
-hegemony
-hierarchy
-historiography
-holocaust
-idealism
-materialism
-industrialization
+Agricultural Revolution
+Revolution
+Alliance
+Alliances
+Ancient Civilizations
+Civilization
+Black Death
+Archaeology
+Architecture
+Bourgeoisie
+Business
+Christianity
+Civil war
+Class
+Colonialism
+Crusades
+Culture
+Demography
+Diaspora
+Discourse
+Early Modern
+Education
+Epochs
+Geography
+Globalization
+Hegemony
+Hierarchy
+Historiography
+Holocaust
+Idealism
+Materialism
+Industrialization
 Islam
 Judaism
-labor
-language
+Labor
+Language
 Marxism
-medicine
-medieval
-migration
-milititary
-multiculturalism
-music
-myth
-nation
-nationalism
-natives
-naval transport
-oral history
-paradigm
-periodization
-philosophy
-plague
-popular culture
-prehistory
-presentism
-primary sources
-progress
-proletariat
-race
-racism
-religion
+Medicine
+Medieval
+Migration
+Military
+Multiculturalism
+Music
+Myth
+Nation
+National
+Nationalism
+Natives
+Naval Transport
+Oral History
+Paradigm
+Periodization
+Philosophy
+Plague
+Popular Culture
+Prehistory
+Presentism
+Primary Sources
+Progress
+Proletariat
+Race
+Racism
+Religion
 Renaissance
-science
-secondary sources
-slavery
-sovereignty
-trade
-urbanization
-warfare
-weaponry
-tradition
-wheel
-chariot
-holodomor
+Science
+Secondary Sources
+Slavery
+Sovereignty
+Trade
+Urbanization
+Warfare
+Weaponry
+Tradition
+Wheel
+Chariot
+Holodomor
 Adolf Hitler
-Jospeh Stalin
+Joseph Stalin
 Mao Zedong
 Pol Pot
 Kim-il-Sung
 Sun-Yat-Sen
 Chiang-Kai-Shek
-communism
-fascism
-zionism
+Communism
+Fascism
+Zionism
 Theodore Herzl
 Gandhi
 Bhagat Singh
@@ -91,23 +96,50 @@ Vladimir Lenin
 Leon Trotsky
 Mesopotamia
 Egypt
+Abraham
+Ishmael
+Isaac
+Moses
+David
+Solomon
+Jesus Christ
+Muhammad
 Indo-European
 Sanskrit
 Scythians
 Hittites
-Cyrus
-Alexander
-Qin Shi Huangdi
+Achaemenid Empire
+Cyrus the Great
+Alexander the Great
+Porus
 Chandragupta Maurya
 Ashoka
+Tamils
+Prithviraj Chauhan
+Maharana Pratap Singh
+Shivaji
+Qin Shi Huangdi
 Julius Caesar
 Augustus Caesar
+Caligula
+Nero
+Marcus Aurelius
+Commodus
+Theodosius
+Diocletian
+Constantine
+Romulus Augustus
 Vercingetorix
 Herman
+Attila the Hun
+Alaric
+Odoacer
 Boudicca
 Alfred the Great
 Ivar the Boneless
 William the Conqueror
+Hugh Capet
+Frederick the Great
 Queen Victoria
 Robert Clive
 Warren Hastings
@@ -117,3 +149,206 @@ Tsar Nicholas II
 Rasputin
 Habsburg Dynasty
 Hohenzollern Dynasty
+Neuchwanstein Castle
+Prussia
+Brandenburg
+World War I
+World War II
+Cold War
+Korean War
+Vietnam War
+Ho chi Minh
+Ngo Dinh Diem
+Sargon of Akkad
+Hammurabi
+Nebuchadnezzar
+Scorpion King
+Narmer
+Charlottenburg Palace
+Syncretism
+Leif Erikson
+Christopher Columbus
+Hernando Cortez
+Francisco Pizzaro
+Ferdinand of Aragon
+Isabella of Castille
+Peter the Apostle
+Pope Urban II
+Romantic Languages
+Germanic Languages
+Theodore Roosevelt
+Franklin Delano Roosevelt
+Ronald Reagan
+Warren G. Harding
+Calvin Coolidge
+Harry S. Truman
+Jomo Kenyata
+Kwame Nkrumah
+Frantz Fanon
+Nelson Mandela
+F.W. de Klerk
+Adam Smith
+Abraham Lincoln
+Benjamin Franklin
+Charles Martel
+Pepin the Short
+Charlemagne
+Moors
+Fulgencio Batista
+Fidel Castro
+Raul Castro
+Che Guevara
+Augusto Pinochet
+Hugo Chavez
+Tito
+Slobodan Milosevic
+Douglas MacArthur
+George Patton
+Dwight David Eisenhower
+John F. Kennedy
+Lyndon B. Johnson
+Richard M. Nixon
+Andrew Jackson
+Napoleon Bonaparte
+Maximilien Robespierre
+Propaganda
+Westward Expansion
+Manifest Destiny
+Battle of Marathon
+Battle of Thermopylae
+Battle of Salamis
+Battle of Platea
+Battle of Guagamela
+Battle of Hydaspas
+Kalinga War
+Battle of Zama
+Battle of Alesia
+Battle of Pharsalus
+Battle of Philippi
+Battle of Actium
+Battle of Teutoburg Forest
+Battle of Tours
+Battle of Edington
+Battle of Hastings
+Genghis Khan
+Ogedai Khan
+Kublai Khan
+Hulagu Khan
+Timur
+Rurik the Viking
+Alexander Nevsky
+Peter the Great
+Catherine the Great
+Henry Ford
+Andrew Carnegie
+John D. Rockefeller
+Cornelius Vanderbilt
+Standard Oil
+United Fruit Company
+Dole Fruit Company
+Houses of Wisdom
+Oxford University
+Harvard University
+Charles Babbage
+Ada Lovelace
+Alan Turing
+George Washington
+Army
+Assassinate
+Axis
+Allies
+Bronze Age
+Blitzkrieg
+Catholic
+Colony
+Colonise
+Colonies
+Commander
+Reformation
+Government
+Historian
+Imperialism
+Iron Age
+Media
+Merchant
+Nazi
+Occupation
+Parliament
+Rebellion
+Relic
+Secular
+Siege
+State
+Stone Age
+Tax
+Territory
+Territorial
+Treason
+Tyrant
+History
+Historical
+Democracy
+King
+Emperor
+Empire
+Country
+Treaty
+President
+War
+Attack
+Attacks
+American
+Treaty of Paris
+Amendment
+Bill of Rights
+Bill
+European
+African
+French Revolution
+Genocide
+Republic
+United
+United Nations
+United States
+Conference
+Conquer
+Strike
+Deal
+Right
+Rights
+Crop
+Theocracy
+Christian
+Election
+Act
+Mercantilism
+Campaign
+Attacked
+Invaded
+Invades
+Occupies
+Occupied
+Peace
+declare war
+declares war
+defeat
+defeated
+defeats
+Protestant
+Reform
+Church
+Discovery
+Economic
+Religious
+Militaristic
+Persecution
+New World
+Expansion
+Countries
+God
+Settler
+Settled
+Disease
+Village
+Pioneer
+
